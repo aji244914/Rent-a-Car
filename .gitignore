@@ -1,0 +1,103 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+.eggs/
+.eggs-cache/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+*.whl
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+Mainenv/
+MainEnv/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.dmypy/
+
+# Pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# VS Code
+.vscode/
+
+# Editor directories and files
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Python virtualenv cache
+pip-log.txt
+
+# JetBrains project files
+*.iml
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows image file caches
+ehthumbs.db
+Desktop.ini
+
+# Node/NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# End of .gitignore

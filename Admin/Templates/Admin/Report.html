@@ -1,0 +1,145 @@
+{% extends "Admin/Head.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(138, 167, 196);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        /* Wrapper for the form and tables */
+        form {
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ECF0F1;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #2C3E50;
+        }
+
+        th {
+            background-color: #1ABC9C;
+            color: white;
+        }
+
+        td {
+            background-color: #34495E;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #2C3E50;
+        }
+
+        /* Input and Button Styles */
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+            background-color: #ECF0F1;
+            color: #2C3E50;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #1ABC9C;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #16A085;
+        }.cont{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2>Renter Report</h2>
+        <table>
+            <tr>
+                <td><label for="txt_from_date">From Date</label></td>
+                <td><input type="date" name="txt_from_date" id="txt_from_date" required></td>
+                <td><label for="txt_to_date">To Date</label></td>
+                <td><input type="date" name="txt_to_date" id="txt_to_date" required></td>
+                <td style="text-align: center;">
+                    <input type="submit" name="btn_submit" value="Submit" aria-label="Submit date range">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% if renter %}
+    <div style="width: 80%; max-width: 800px; margin: 20px auto;">
+        <table>
+            <tr>
+                <th scope="col">SI.No</th>
+                <th scope="col">Renter Name</th>
+                <th scope="col">Booked Count</th>
+            </tr>
+            {% for i in renter %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.Renter_name }}</td>
+                <td>
+                    {% if i.count %}
+                        {{ i.count }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <div style="width: 80%; max-width: 800px; margin: 20px auto; text-align: center; color: #ECF0F1;">
+        No renter data available for the selected date range.
+    </div>
+    {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

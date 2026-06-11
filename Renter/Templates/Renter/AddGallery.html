@@ -1,0 +1,150 @@
+{% extends 'Renter/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Gallery</title>
+    <style>
+        /* General styling for the page */
+        body {
+            background-color: rgb(138, 167, 196); /* Light background for the entire page */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Form container styling */
+        form {
+            background-color: rgb(138, 167, 196);
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%; /* Reduced width for the form */
+            max-width: 800px; /* Maximum width of the form */
+            margin: 0 auto;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #2C3E50; /* Dark background for tables */
+            color: white;
+            border-collapse: collapse; /* Prevent double borders */
+        }
+
+        table td,
+        table th {
+            padding: 12px;
+            border: 1px solid #34495E; /* Border color for table cells */
+        }
+
+        table th {
+            background-color: #34495E;
+            border: none; /* Remove border for table header */
+        }
+
+        /* Style for input fields */
+        input[type="file"] {
+            background-color: #34495E;
+            color: white;
+            border: 1px solid #34495E;
+            padding: 10px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Style for submit button */
+        input[type="submit"] {
+            background-color: transparent;
+            border: 1px solid rgb(138, 167, 196);
+            color: black;
+            padding: 10px 15px;
+            margin-top: 10px;
+            display: block;
+            margin: 10px auto;
+            width: 50%;
+            border-radius: 4px;
+        }
+
+        /* Removed hover effect for submit button */
+        /* input[type="submit"]:hover {
+            background-color: rgb(110, 137, 168);
+            border-color: rgb(110, 137, 168);
+            color: white;
+        } */
+
+        /* Style for action buttons in the gallery table */
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #34495E;
+            border-radius: 4px;
+        }
+
+        /* Removed hover effect for action buttons */
+        /* a:hover {
+            background-color: rgb(110, 137, 168);
+            border-color: rgb(110, 137, 168);
+            color: white;
+        } */
+
+        /* Style for images */
+        img {
+            border-radius: 8px;
+        }
+
+        /* Remove border from header */
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border: none; /* Ensure no border is applied */
+            background-color: transparent; /* Make sure background is transparent */
+            color: #333; /* Adjust text color if needed */
+        }
+
+    </style>
+</head>
+
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Header Section -->
+        <h2>Add Vehicle Photos</h2>
+        
+        <table align="center" border="1">
+            <tr>
+                <td>Vehicle Image</td>
+                <td><input type="file" id="filephoto4" name="filephoto4" accept="image/*" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Add" name="txt_cat1" />
+                </td>
+            </tr>
+        </table>
+
+        <!-- Displaying gallery images -->
+        <table align="center" border="2">
+            <tr>
+                <th>Sl.no</th>
+                <th>Photo</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for i in Gallery %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><img src="{{ i.Vehicle_photo.url }}" width="80" height="80" /></td>
+                <td><a href="{% url 'Renter:deletegallery' i.id id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+
+</html>
+{% endblock content %}

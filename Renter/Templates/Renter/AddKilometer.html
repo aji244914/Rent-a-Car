@@ -1,0 +1,113 @@
+{% extends 'Renter/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Start Kilometer</title>
+        <style>
+            /* Apply background color to the body */
+            body {
+                background-color: rgb(138, 167, 196); /* Light background for the entire page */
+                margin: 0; /* Remove default margin */
+                padding: 0; /* Remove default padding */
+                color: black; /* Change text color for the body to black */
+            }
+
+            /* Vehicle details form container background color */
+            form {
+                background-color: rgb(138, 167, 196); /* Light background for form container */
+                padding: 20px;
+                border-radius: 8px;
+                margin-top: 30px; /* Move form slightly down */
+                width: 70%; /* Reduce width of the form */
+                margin-left: auto;
+                margin-right: auto; /* Center the form */
+                color: black; /* Change text color inside the form to black */
+            }
+
+            /* Apply background color to the table and center it */
+            table {
+                background-color: #2C3E50; /* Dark blue-grey color for the table */
+                color: white; /* White text color for the table */
+                width: 50%; /* Ensure table takes full width */
+                border-collapse: collapse; /* Prevent double borders between cells */
+                margin-left: auto; /* Center table horizontally */
+                margin-right: auto; /* Center table horizontally */
+            }
+
+            /* Apply background color to table cells */
+            td, th {
+                background-color: #2C3E50; /* Dark blue-grey color for table cells */
+                color: white; /* White text color */
+                border: 1px solid #34495E; /* Border color to match the theme */
+                padding: 10px; /* Add padding to cells */
+            }
+
+            /* Add white vertical borders */
+            td, th {
+                border-right: 1px solid white; /* White vertical border between columns */
+            }
+
+            /* Remove the right border from the last column to prevent double borders */
+            td:last-child, th:last-child {
+                border-right: none;
+            }
+
+            /* Style for form fields like input and select */
+            .form-control {
+                background-color: #2C3E50; /* Dark blue-grey background */
+                color: green; /* Change text color for input fields to green */
+                border: 1px solid #34495E; /* Border color to match the theme */
+                border-radius: 4px; /* Rounded corners */
+                padding: 10px; /* Add padding */
+                width: 100%; /* Ensure inputs take full width */
+            }
+
+            .form-control:focus {
+                background-color: #34495E; /* Darker shade when focused */
+                border-color: #1abc9c; /* Greenish focus border */
+                outline: none; /* Remove default outline */
+            }
+
+            /* Style for buttons with black font */
+            .btn-light {
+                background-color: transparent;
+                border: 1px solid rgb(138, 167, 196); /* Border matches the page background color */
+                color: black; /* Change button text color to black */
+                padding: 10px 15px; /* Padding to make buttons more clickable */
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .btn-light:hover {
+                background-color: rgb(5, 5, 5); /* Hover effect (darker color) */
+                border-color: rgb(7, 8, 9); /* Border changes on hover */
+                color: white; /* Text color changes to white on hover */
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <h1 align="center">Start Kilometer</h1>
+
+            <table>
+                <tr>
+                    <td>Started Kilometer</td>
+                    <td><input type="text" name="txt_skm" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Add" name="dist" class="btn btn-light"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+{% endblock content %}

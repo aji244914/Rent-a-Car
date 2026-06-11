@@ -1,0 +1,143 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Booking</title>
+    <style>
+        /* Apply background color to the body or container around the table */
+        body {
+            background-color: rgb(138, 167, 196); /* Light background for the entire page */
+            margin: 0; /* Remove default margin for better control */
+            padding: 0; /* Remove default padding */
+        }
+
+        /* Vehicle booking form container background color */
+        form {
+            background-color: rgb(138, 167, 196); /* Light background for form container */
+            padding: 10px; /* Reduced padding to make the form more compact */
+            border-radius: 8px;
+            max-width: 500px; /* Set a maximum width for the form */
+            margin: 20px auto 0; /* Center the form horizontally and move it upward with a reduced margin-top */
+        }
+
+        /* Vehicle booking heading */
+        h1 {
+            text-align: center;
+            margin-top: 0; /* Move the heading up */
+            padding-top: 10px; /* Add some padding to the top */
+        }
+
+        /* Apply background color to the table */
+        .table {
+            background-color: #2C3E50; /* Dark blue-grey color for the table */
+            color: white; /* Make text color white for contrast */
+            width: 100%; /* Ensure table takes full width */
+            border-collapse: collapse; /* Prevent double borders between cells */
+            max-width: 400px; /* Limit the table width */
+            margin: 10px auto 0; /* Move the table upwards and center it */
+        }
+
+        /* Apply background color to table cells */
+        td, th {
+            background-color: #2C3E50; /* Dark blue-grey color for table cells */
+            color: white; /* White text color */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            padding: 5px 10px; /* Reduced padding to make the cells more compact */
+            font-size: 14px; /* Reduce font size */
+        }
+
+        /* Add white vertical borders */
+        td, th {
+            border-right: 1px solid white; /* White vertical border between columns */
+        }
+
+        /* Remove the right border from the last column to prevent double borders */
+        td:last-child, th:last-child {
+            border-right: none;
+        }
+
+        /* Style for form fields like input and select */
+        .form-control, .form-select {
+            background-color: #2C3E50; /* Dark blue-grey background */
+            color: white; /* White text color */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            border-radius: 4px; /* Rounded corners */
+            padding: 8px; /* Reduced padding to make the form elements smaller */
+            width: 100%; /* Ensure input fields take full width */
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #34495E; /* Darker shade when focused */
+            border-color: #1abc9c; /* Greenish focus border */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Style for buttons with black font */
+        .btn-light {
+            background-color: transparent;
+            border: 1px solid rgb(138, 167, 196); /* Border matches the page background color */
+            color: black; /* Text color changed to black */
+            padding: 8px; /* Reduced padding for a smaller button */
+            width: 100%; /* Make the button take full width */
+        }
+
+        .btn-light:hover {
+            background-color: rgb(110, 137, 168); /* Hover effect (darker color) */
+            border-color: rgb(110, 137, 168); /* Border changes on hover */
+            color: white; /* Text color changes to white on hover */
+        }
+
+        /* Optional: Add some padding around the form */
+        .table-responsive {
+            margin-top: 10px; /* Reduced margin for a more compact look */
+        }
+
+        /* Optional: Style table headers */
+        th {
+            background-color: #34495E; /* Slightly darker color for the table headers */
+            color: white;
+        }
+
+        /* Optional: Style table rows */
+        tr {
+            border-bottom: 1px solid #BDC3C7;
+        }
+
+        /* Optional: Style table rows on hover */
+        tr:hover {
+            background-color: #34495E;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <h1>Vehicle Booking</h1>
+    
+        <div class="table-responsive">
+            <table class="table table-bordered" align="center">
+                <tr>
+                    <td>Date</td>
+                    <td><input type="Date" name="txt_Date" class="form-control" id="dateInput"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2" align="center"><input type="submit" name="submit" value="submit" class="btn-light py-2 w-100"/></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+<script>
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Set it as the minimum date
+    document.getElementById('dateInput').setAttribute('min', today);
+  </script>
+{% endblock content %}
+

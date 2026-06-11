@@ -1,0 +1,40 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+</head>
+<body>
+    <form method="POST">
+        {%csrf_token%}
+    <table border="2" align="center">
+        <tr>
+            <td>Content</td>
+            <td><input type="text" name="txt_feedback" id=""></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" align="center"><input type="submit" name="submit" value="submit"/></td>
+        </tr>
+    </table>
+    <table border="1" align="center">
+        <tr>
+            <td>sl.no</td>
+            <td>Content</td>
+            <td>Action</td>
+        </tr>
+        {%for i in Feedback%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.feedback_content}}</td>
+            <td></td>
+        </tr>
+        {%endfor%}
+    </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

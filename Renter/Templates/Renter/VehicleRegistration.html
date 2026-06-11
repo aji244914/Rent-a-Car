@@ -1,0 +1,171 @@
+{% extends 'Renter/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration</title>
+    <style>
+        /* Apply background color to the body or container around the table */
+        body {
+            background-color: rgb(138, 167, 196); /* Light background for the entire page */
+        }
+
+        /* Vehicle details form container background color */
+        form {
+            background-color: rgb(138, 167, 196); /* Light background for form container */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Apply background color to the table */
+        .table {
+            background-color: #2C3E50; /* Dark blue-grey color for the table */
+            color: white; /* Make text color white for contrast */
+            width: 80%; /* Set table width to 80% of its parent container */
+            margin: 0 auto; /* Center the table horizontally */
+            border-collapse: collapse; /* Prevent double borders between cells */
+        }
+
+        /* Apply background color to table cells */
+        td, th {
+            background-color: #2C3E50; /* Dark blue-grey color for table cells */
+            color: white; /* White text color */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            padding: 10px; /* Add padding to cells */
+        }
+
+        /* Add white vertical borders */
+        td, th {
+            border-right: 1px solid white; /* White vertical border between columns */
+        }
+
+        /* Remove the right border from the last column to prevent double borders */
+        td:last-child, th:last-child {
+            border-right: none;
+        }
+
+        /* Style for form fields like input and select */
+        .form-control, .form-select {
+            background-color: white; /* Change input fields and select boxes to white */
+            color: black; /* Black text color for better readability */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px; /* Add padding */
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #f0f0f0; /* Slightly grey background when focused */
+            border-color: #1abc9c; /* Greenish focus border */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Style for buttons with black font */
+        .btn-light {
+            background-color: transparent;
+            border: 1px solid rgb(138, 167, 196); /* Border matches the page background color */
+            color: black; /* Text color changed to black */
+        }
+
+        .btn-light:hover {
+            background-color: rgb(110, 137, 168); /* Hover effect (darker color) */
+            border-color: rgb(110, 137, 168); /* Border changes on hover */
+            color: white; /* Text color changes to white on hover */
+        }
+
+        /* Optional: Add some padding around the form */
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        /* Optional: Style table headers */
+        th {
+            background-color: #34495E; /* Slightly darker color for the table headers */
+            color: white;
+        }
+
+        /* Optional: Style table rows */
+        tr {
+            border-bottom: 1px solid #BDC3C7;
+        }
+
+        /* Optional: Style table rows on hover */
+        tr:hover {
+            background-color: #34495E;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 align="center">Vehicle Registration</h1>
+    
+        <table class="table">
+            <tr>
+                <td>Vehicle Name</td>
+                <td><input type="text" name="txt_veh" value="{{vt.vehicletype_name}}" class="form-control"/> </td>
+            </tr>
+            <tr>
+                <td>Vehicle Image</td>
+                <td><input type="file" id="filephoto3" name="filephoto3" accept="image/*" class="form-control"/></td>
+            </tr>
+            <tr>
+                <td>Vehicle Type</td>
+                <td>
+                    <select name="sel_vehicle" class="form-select">
+                        <option value="">--select--</option>
+                        {% for i in Vehicletype %}
+                            <option value="{{i.id}}">{{i.vehicletype_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Minimum KM</td>
+                <td><input type="text" name="txt_km" class="form-control"/> </td>
+            </tr>
+            <tr>
+                <td>Minimum Rate</td>
+                <td><input type="text" name="txt_rat" class="form-control"/> </td>
+            </tr>
+            <tr>
+                <td>Kilometer Rate</td>
+                <td><input type="text" name="txt_rat" class="form-control"/> </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Add" name="btn1" class="btn-light"/>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr>
+                <td>#</td>
+                <td>Vehicle Name</td>
+                <td>Vehicle Image</td>
+                <td>Vehicle Type</td>
+                <td>Vehicle MinKm</td>
+                <td>Vehicle Minrate</td>
+                <td>Vehicle kmrate</td>
+                <td colspan="2">Action</td>
+            </tr>
+            {% for i in Vehicle %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{i.Vehicle_name}}</td>
+                    <td><img src="{{i.Vehicle_image.url}}" width="80" height="80" class="rounded"></td>
+                    <td>{{i.vehicletype.vehicletype_name}}</td>
+                    <td>{{i.Vehicle_minkm}}</td>
+                    <td>{{i.Vehicle_minrate}}</td>
+                    <td>{{i.Vehicle_kmrate}}</td>
+                    <td><a href="{% url 'Renter:deleteveh' i.id %}">Delete</a></td>
+                    <td><a href="{% url 'Renter:AddGallery' i.id %}">Add Photos</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

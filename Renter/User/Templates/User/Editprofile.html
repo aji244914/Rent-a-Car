@@ -1,0 +1,42 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" border="2">
+            <tr>
+                <td> Name</td>
+                <td><input type="text" value="{{user.User_name}}" name="txt_u1"/> </td>
+            </tr>
+            <tr>
+                <td> Email</td>
+                <td><input type="text" value="{{user.User_Email}}" name="txt_u2"/> </td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" value="{{user.User_contact}}" name="txt_u3"/> </td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><textarea name="txt_area"> {{user.User_address}}     </textarea></td>
+            </tr>
+        
+    
+            
+            <tr>
+                <td colspan="2" align="center">
+                    <input align="center" type="submit" name="btn" value="Edit " />
+                    
+                </td>
+            </tr>
+        </table>
+        {% endblock content %}

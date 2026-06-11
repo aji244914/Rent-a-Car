@@ -1,0 +1,63 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Complaint</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+    <table border="1" >
+
+        <tr>
+            <td>Subject</td>
+            <td><input type="text"   name="txt_cat2"/> </td>
+        </tr>
+        <tr>
+            <td>Complaint</td>
+            <td><textarea name="txt_area">  </textarea></td>
+        </tr>
+        <tr>
+        
+            <td colspan="2" align="center"> <input type="submit"  value="Add" name="txt_cat1" values="cat1"/> </td>
+        </tr>
+        </table>
+        <table border="2" align="center" >
+            <tr>
+                <td>si.no</td>
+                <td>Subject</td>
+                <td>Complaint</td>
+                <td>Postdate</td>
+                <td>Reply</td>
+                <td>Replydate</td>
+                <td>Action</td>
+            </tr>
+            {% for i in comp %}
+            
+                <td>{{ forloop.counter}}</td>
+                <td>{{i.Complaint_subject}}</td>
+                <td>{{i.Complaint_complaint}}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{% if i.complaint_status == 1 %}
+                {{i.complaint_reply}}
+                {% else %}
+                not reply
+                {% endif%}
+            </td>
+            
+            <td>{{i.complaint_replydate}}</td>
+
+                <td><a href="{%url 'User:deletecomp' i.id %}">Delete</a></td>
+                
+
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {%csrf_token%}
+    <table border="1">
+        <tr>
+            <td>number</td>
+            <td><input type="text" name="larg1"/> </td>
+        </tr>
+        <tr>
+            <td>number2 </td>
+            <td> <input type="text" name="larg2"/> </td>
+        </tr>
+        <tr>
+        
+            <td> <input type="submit" name="add" values="add"/> </td>
+        </tr>
+        <tr>
+            <td> largest number</td>
+            <td> {{result}}</td>
+        </tr>
+        </table>
+    </form>
+        
+    
+</body>
+</html>

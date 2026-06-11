@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renter Registration</title>
+    <style>
+        /* Basic Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light green background */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+    
+        h1 {
+            color: #0277bd; /* Blue color for the header */
+            font-size: 36px;
+            margin-top: 50px;
+        }
+    
+        /* Form Styling */
+        table {
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        td {
+            padding: 10px;
+            font-size: 16px;
+        }
+    
+        input[type="email"], input[type="password"], input[type="text"], textarea, select {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            border: 2px solid #0277bd; /* Blue border */
+            border-radius: 5px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+    
+        input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
+            border-color: #00c853; /* Light green border on focus */
+        }
+    
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #0277bd; /* Blue button background */
+            color: #ffffff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #00c853; /* Light green on hover */
+        }
+    
+        /* Alert Styling for Messages */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    
+        li {
+            background-color: #ffccbc; /* Light red for error messages */
+            color: #d32f2f;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    
+        li.success {
+            background-color: #c8e6c9; /* Light green for success messages */
+            color: #388e3c;
+        }
+    </style>    
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" border="2">
+            <h1> Renter Registration</h1>
+            <tr>
+                <td> Name</td>
+                <td><input type="text" name="txt_name" requirrequired pattern="^[A-Z]+[a-zA-Z ]*$" title="Only alphabets, spaces, and first letter must be uppercase"ed  /></td>
+            </tr>
+            <tr>
+                <td> Email</td>
+                <td><input type="email" name="txt_email" required /></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_cnt" required pattern="[7-9]{1}[0-9]{9}" title="Phone number must start with 7-9 and be 10 digits"  /></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><textarea name="txt_area"></textarea></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" id="filephoto" name="filephoto " accept="image/*" /></td>
+
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" id="filephoto1" name="filephoto1 " accept="image/*" /></td>
+
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>
+
+                    <select name="sel_district" id="sel_district">
+                        <option>--select--</option>
+                        {% for i in distdata %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <option></option>
+                </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="sel_place" id="sel_place">
+                    <option value="">--select--</option>
+                </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txt_pwd" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input align="center" type="submit" name="btn" value="Submit" />
+                    <input align="center" type="submit" name="btn" value="Reset" />
+                </td>
+            </tr>
+        </table>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $("#sel_district").change(function () {
+                var did = $(this).val();
+                var ur = "{% url 'Guest:ajaxplace' %}"
+                $.ajax({
+                    url: ur,
+                    data: { did: did, },
+                    success: function (data) {
+                        $("#sel_place").html(data);
+                    },
+                });
+            });
+        </script>

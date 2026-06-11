@@ -1,0 +1,98 @@
+{% extends 'Renter/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Kilometer</title>
+    <style>
+        /* Apply background color to the body or container around the table */
+        body {
+            background-color: rgb(138, 167, 196); /* Light background for the entire page */
+        }
+
+        /* Profile form container background color */
+        form {
+            background-color: rgb(138, 167, 196); /* Light background for form container */
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%; /* Reduced the width to 60% */
+            max-width: 800px; /* Set a maximum width to prevent it from growing too large */
+            margin: 0 auto;
+        }
+
+        /* Apply background color to the table */
+        table {
+            background-color: #2C3E50; /* Dark blue-grey color for the table */
+            color: white; /* Make text color white for contrast */
+            width: 100%; /* Ensure table takes full width */
+            border-collapse: collapse; /* Prevent double borders between cells */
+        }
+
+        /* Apply background color to table cells */
+        td {
+            background-color: #2C3E50; /* Dark blue-grey color for table cells */
+            color: white; /* White text color */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            padding: 12px; /* Add padding to cells */
+        }
+
+        /* Remove the right border from the last column to prevent double borders */
+        td:last-child {
+            border-right: none;
+        }
+
+        /* Optional: Style the form input fields */
+        input[type="text"] {
+            background-color: #34495E; /* Dark blue-grey background */
+            color: white; /* White text color */
+            border: 1px solid #34495E; /* Border color to match the theme */
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px; /* Add padding */
+            width: 100%; /* Ensure input takes full width of the cell */
+        }
+
+        /* Style the submit button */
+        input[type="submit"] {
+            background-color: transparent;
+            border: 1px solid rgb(138, 167, 196); /* Border matches the page background color */
+            color: black; /* Text color changed to black */
+            padding: 10px 15px; /* Padding to make buttons more clickable */
+            text-align: center;
+            display: block;
+            margin: 10px auto;
+            width: 50%; /* Reduced button width to fit the layout */
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgb(110, 137, 168); /* Hover effect (darker color) */
+            border-color: rgb(110, 137, 168); /* Border changes on hover */
+            color: white; /* Text color changes to white on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table align="center" class="table table-bordered">
+                <tr>
+                    <td>End Kilometer</td>
+                    <td><input type="text" name="txt_ekm" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Add" name="dist" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+
+</html>
+{% endblock content %}

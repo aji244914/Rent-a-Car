@@ -1,0 +1,204 @@
+{% extends "Admin/Head.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renter List</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color:rgb(138, 167, 196);
+            color: #34495E;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+        }
+
+        h2 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        /* Table Styling */
+        table {
+            width: 90%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #BDC3C7;
+        }
+
+        th {
+            background-color: #16A085;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #ECF0F1;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #BDC3C7;
+        }
+
+        /* Hover effect for rows */
+        tr:hover td {
+            background-color: #1ABC9C;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Image Styling */
+        img {
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        /* Link Styling */
+        a {
+            color: #3b62cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0f1111;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 95%;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Renter List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>SI.NO</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+            
+                <th>photo</th>
+                <th>proof</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in renter %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.Renter_name }}</td>
+                <td>{{ i.Renter_Email }}</td>
+                <td>{{ i.Renter_contact }}</td>
+                <td>{{ i.Renter_address }}</td>
+                
+                <td>
+                    {% if i.Renter_photo %}
+                        <img src="{{ i.Renter_photo.url }}" alt="renter Photo"  width=80 height="80" >
+                    {% else %}
+                        No Photo
+                    {% endif %}
+                </td>
+                <td>
+                    {% if i.Renter_proof %}
+                        <img src="{{ i.Renter_proof.url }}"  alt="renter Proof"  width=80 height="80" >
+                    {% else %}
+                        No Proof
+                    {% endif %}
+                </td>
+            
+                <td><a href="{% url 'Admin:accept' i.id %}">accept</a>/ <a href="{% url 'Admin:reject' i.id %}">reject</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No users found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <h2>Accepted Owners</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>SI.NO</th>
+                <th>Renter Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in accept %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.Renter_name }}</td>
+                <td>{{ i.Renter_Email }}</td>
+                <td>{{ i.Renter_contact }}</td>
+                <td>{{ i.Renter_address }}</td>
+            
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Rejected Owners</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>SI.NO</th>
+                <th>Owner Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in reject %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.Renter_name }}</td>
+                <td>{{ i.Renter_Email }}</td>
+                <td>{{ i.Renter_contact }}</td>
+                <td>{{ i.Renter_address }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </table>
+</body>
+</html>
+{% endblock %}
